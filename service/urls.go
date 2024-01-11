@@ -11,7 +11,9 @@ const (
 	topWordsAmount = 10
 )
 
-// ReadURLsFromFile read all url's from a given filePath. we use go routines  for better performance
+// ReadURLsFromFile read all url's from a given filePath.
+// TODO we might try using go routines and buffered channel for better performance (using
+// file.Seek maybe so each routine will read different segment of file).
 func ReadURLsFromFile(filePath string, numWorkers int) ([]string, error) {
 	var urls []string
 	file, err := os.Open(filePath)
