@@ -46,6 +46,7 @@ func CountWordsFromAllURLs(urls []string, validWords map[string]bool) map[string
 		close(wordCountCh)
 	}()
 
+	//TODO instead spawning so many routines, consider having less routines, each will handle several urls
 	for _, url := range urls {
 		wg.Add(1)
 		go countWords(url, validWords, wordCountCh, &wg)
@@ -69,6 +70,7 @@ func CountWordsFromAllURLs(urls []string, validWords map[string]bool) map[string
 
 // countWords counts the valid words included in the url content, save them in a map channel (wordCounts).
 // The key in the map is the word and the value is the count of this word.
+// TODO use some kind of rate limiter
 func countWords(url string, validWords map[string]bool, wordCountCh chan map[string]int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	response, err := http.Get(url)
