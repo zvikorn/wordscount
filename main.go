@@ -13,7 +13,7 @@ func main() {
 		fmt.Println("Error reading URLs:", err)
 		return
 	}
-	fmt.Printf("There are %d URL's\n", len(urls))
+	fmt.Printf("There are %d URL's \n", len(urls))
 
 	//Load valid words from the word bank (not all the words in the word bank are valid)
 	validWords := service.LoadValidWords()
